@@ -3,7 +3,7 @@ import Image from "next/image";
 const ModalImage = ({ onClose, data }: any) => {
   const { image, name } = data;
   return (
-    <div className="transition duration-700 ease-in-out flex top-0 bottom-0 left-0 right-0 justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-30">
+    <div className="p-2 flex top-0 bottom-0 left-0 right-0 justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-30">
       <div
         onClick={onClose}
         className="absolute top-0 bottom-0 left-0 right-0 z-40 bg-black opacity-20"

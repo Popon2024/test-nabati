@@ -6,6 +6,7 @@ import NavbarLanguange from "@/components/NavbarLanguange";
 import Company from "@/components/Company";
 import ModalImage from "@/components/ModalImage";
 import ListProduct from "@/components/ListProduct";
+import Loading from "@/components/Loading";
 
 interface DataProductInterface {
   id: string;
@@ -63,7 +64,7 @@ export default function Home() {
       <div>
         <Company language={languange} />
       </div>
-      {loading && <div>Loading...</div>}
+      {loading && <Loading />}
       {!loading && (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {dataProduct.map((data, i) => (

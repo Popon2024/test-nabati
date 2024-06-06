@@ -6,10 +6,12 @@ interface CompanyInterface {
 
 const Company = ({ language }: CompanyInterface) => {
   return (
-    <div className="p-2 mt-2">
-      <div>{WORDING_COMPANY[language].title}</div>
-      <div className="mt-2">{WORDING_COMPANY[language].desc[0]}</div>
-      <div className="mt-2">{WORDING_COMPANY[language].desc[1]}</div>
+    <div className="p-2 my-5 text-center">
+      <div className="text-3xl font-bold text-rose-800 text-shadow drop-shadow-lg">
+        {WORDING_COMPANY[language].title}
+      </div>
+      <div className="mt-2 tracking-wider">{WORDING_COMPANY[language].desc[0]}</div>
+      <div className="mt-2 tracking-wider">{WORDING_COMPANY[language].desc[1]}</div>
     </div>
   );
 };
