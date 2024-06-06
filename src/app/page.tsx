@@ -3,8 +3,9 @@ import ServiceImage from "@/services/image";
 import ServiceProduct from "@/services/product";
 import { useEffect, useMemo, useState } from "react";
 import NavbarLanguange from "@/components/NavbarLanguange";
-import Image from "next/image";
 import Company from "@/components/Company";
+import ModalImage from "@/components/ModalImage";
+import ListProduct from "@/components/ListProduct";
 
 interface DataProductInterface {
   id: string;
@@ -12,15 +13,28 @@ interface DataProductInterface {
   image: string;
 }
 
-export type LangInterface = "id" | "en";
+export type LangTYpe = "id" | "en";
+
+export type SelectImageType = string | null;
 
 export default function Home() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [languange, setLanguage] = useState<LangInterface>("id");
+  const [languange, setLanguage] = useState<LangTYpe>("id");
   const [dataProduct, setDataProduct] = useState<DataProductInterface[]>([]);
+  const [selectImage, setSelectImage] = useState<SelectImageType>();
 
-  const changeLanguange = (e: LangInterface) => {
+  const changeLanguange = (e: LangTYpe) => {
     setLanguage(e);
+  };
+
+  const onCloseModal = () => {
+    document.body.style.overflow = "auto";
+    setSelectImage(null);
+  };
+
+  const onOpenModal = (data: any) => {
+    document.body.style.overflow = "hidden";
+    setSelectImage(data);
   };
 
   const getData = async () => {
@@ -52,16 +66,13 @@ export default function Home() {
       {loading && <div>Loading...</div>}
       {!loading && (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {dataProduct.map(({ id, name, image }) => (
-            <div className="shadow-lg p-2 border border-gray-300 rounded-lg" key={id}>
-              <div className="overflow-hidden rounded-lg">
-                <Image alt="image-product" src={image} width={500} height={100} />
-              </div>
-              <div className="mt-2">{name}</div>
-            </div>
+          {dataProduct.map((data, i) => (
+            <ListProduct key={i} onOpenModal={onOpenModal} data={data} />
           ))}
         </div>
       )}
+
+      {selectImage && <ModalImage onClose={onCloseModal} data={selectImage} />}
     </main>
   );
 }
