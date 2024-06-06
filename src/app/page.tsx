@@ -7,6 +7,7 @@ import Company from "@/components/Company";
 import ModalImage from "@/components/ModalImage";
 import ListProduct from "@/components/ListProduct";
 import Loading from "@/components/Loading";
+import Footer from "@/components/Footer";
 
 interface DataProductInterface {
   id: string;
@@ -59,21 +60,23 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen p-4">
-      <NavbarLanguange onChange={changeLanguange} />
-      <div>
-        <Company language={languange} />
-      </div>
-      {loading && <Loading />}
-      {!loading && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {dataProduct.map((data, i) => (
-            <ListProduct key={i} onOpenModal={onOpenModal} data={data} />
-          ))}
+    <main className="min-h-screen">
+      <div className="p-4">
+        <NavbarLanguange onChange={changeLanguange} />
+        <div>
+          <Company language={languange} />
         </div>
-      )}
-
-      {selectImage && <ModalImage onClose={onCloseModal} data={selectImage} />}
+        {loading && <Loading />}
+        {!loading && (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {dataProduct.map((data, i) => (
+              <ListProduct key={i} onOpenModal={onOpenModal} data={data} />
+            ))}
+          </div>
+        )}
+        {selectImage && <ModalImage onClose={onCloseModal} data={selectImage} />}
+      </div>
+      <Footer />
     </main>
   );
 }
